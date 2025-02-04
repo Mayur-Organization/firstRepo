@@ -82,6 +82,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
           restore-keys: ${{ runner.os }}-gradle
      
+      - name: Grant execute permission to gradlew
+        run: chmod +x ./gradlew
+        working-directory: firstService
       
       - name: Build and analyze
         env:
