@@ -33,25 +33,25 @@ jobs:
         uses: actions/cache@v3
         with:
           path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             gradle-${{ runner.os }}- 
 
-      
+
   # permission for gradlew
       - name: permission Gradle
         run: chmod +x ./gradlew
-        working-directory: firstService
+       
 
   # Build with gradle
       - name: Build with Gradle
         run: ./gradlew build
-        working-directory: firstService
+        
 
   #gradle dependencies
       - name: geadle dependencies
         run: gradle dependencies 
-        working-directory: firstService
+       
 
 
 
