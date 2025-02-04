@@ -12,6 +12,41 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
+      # Ensure gradlew is inited
+      - name: call to gradle init
+        run: gradle init --overwrite
+        
+      # Ensure gradlew is there
+      - name: call to gradle
+        run: gradle wrapper --gradle-version 8.12.1
+        
+      # Ensure gradlew has execute permission
+      - name: Ensure gradlew is executable
+        run: chmod +x gradlew
+        
+      # Ensure gradlew has execute permission
+      - name: list of tasksList
+        run: ./gradlew tasks
+      
+  # permission for gradlew
+      - name: permission Gradle
+        run: chmod +x ./gradlew
+        working-directory: firstService
+
+  # Build with gradle
+      - name: Build with Gradle
+        run: ./gradlew build
+        working-directory: firstService
+
+  #gradle dependencies
+      - name: geadle dependencies
+        run: gradle dependencies 
+        working-directory: firstService
+
+
+
+
+      
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
