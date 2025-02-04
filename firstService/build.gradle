@@ -2,7 +2,8 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.4.2'
 	id 'io.spring.dependency-management' version '1.1.7'
- id 'org.sonarqube' version '4.3.0.3225' // Add the SonarQube plugin
+         
+	id "org.sonarqube" version "6.0.1.5171"
 }
 
 group = 'com.example'
@@ -38,11 +39,9 @@ tasks.named('test') {
 
 
 // SonarQube configuration
-sonarqube {
-    properties {
-        property "sonar.projectKey", "demoproject1"
-        property "sonar.projectName", "demoproject1"
-        property "sonar.host.url", "http://localhost:9000"
-        property "sonar.login", "sqp_5774921aab4c9fa874fcc205f7d570490aa19350"
-    }
+sonar {
+  properties {
+    property "sonar.projectKey", "Mayur-Organization_firstRepo_007a2cd5-2aec-44c2-9132-abc57f7c706a"
+    property "sonar.projectName", "firstRepo"
+  }
 }
