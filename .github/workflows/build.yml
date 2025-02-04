@@ -85,6 +85,9 @@ jobs:
       - name: Grant execute permission to gradlew
         run: chmod +x ./gradlew
         working-directory: firstService
+
+      - name: Check SonarQube URL
+        run: curl -I $SONAR_HOST_URL
       
       - name: Build and analyze
         env:
