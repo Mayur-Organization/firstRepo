@@ -91,7 +91,7 @@ jobs:
       
       - name: Build and analyze
         env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: "sqp_240a80acfca1df514eb9a23ae66b313e64ada564"
+          SONAR_HOST_URL: "http://localhost:9000"
         run: ./gradlew build sonar --info
         working-directory: firstService
