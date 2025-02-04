@@ -27,6 +27,15 @@ jobs:
       # Ensure gradlew has execute permission
       - name: list of tasksList
         run: ./gradlew tasks
+
+ # Cache Gradle dependencies
+      - name: Cache Gradle dependencies
+        uses: actions/cache@v3
+        with:
+          path: ~/.gradle/caches
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}
+          restore-keys: |
+            gradle-${{ runner.os }}- 
       
   # permission for gradlew
       - name: permission Gradle
