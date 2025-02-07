@@ -1,2 +1,2 @@
 # firstRepo
-first repository for sonarqube ..
+first repository for sonarqube ...
