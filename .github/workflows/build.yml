@@ -5,90 +5,31 @@ on:
     branches:
       - main
 
-
 jobs:
   build:
-    name: Build and analyze
+    name: Build and Analyze
     runs-on: ubuntu-latest
-    
+
     steps:
-      # Ensure gradlew is inited
-      - name: call to gradle init
-        run: gradle init --overwrite
-        
-      # Ensure gradlew is there
-      - name: call to gradle
-        run: gradle wrapper --gradle-version 8.12.1
-        
-      # Ensure gradlew has execute permission
-      - name: Ensure gradlew is executable
-        run: chmod +x gradlew
-        
-      # Ensure gradlew has execute permission
-      - name: list of tasksList
-        run: ./gradlew tasks
-
- # Cache Gradle dependencies
-      - name: Cache Gradle dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.gradle/caches
-          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
-          restore-keys: |
-            gradle-${{ runner.os }}- 
-
-
-  # permission for gradlew
-      - name: permission Gradle
-        run: chmod +x ./gradlew
-       
-
-  # Build with gradle
-      - name: Build with Gradle
-        run: ./gradlew build
-        
-
-  #gradle dependencies
-      - name: geadle dependencies
-        run: gradle dependencies 
-       
-
-
-
-
-      
+      # Checkout code
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0  # Shallow clones should be disabled for a better relevancy of analysis
+          fetch-depth: 0  # Required for SonarQube analysis
+
+      # Grant execute permission to Gradle wrapper
+      - name: Make Gradlew Executable
+        run: chmod +x ./gradlew
+        working-directory: firstService
+
+      # Set up JDK 17
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
           java-version: 17
-          distribution: 'zulu' # Alternative distribution options are available.
-     
-      
-      - name: Cache SonarQube packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.sonar/cache
-          key: ${{ runner.os }}-sonar
-          restore-keys: ${{ runner.os }}-sonar
-     
-      
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle') }}
-          restore-keys: ${{ runner.os }}-gradle
-     
-      - name: Grant execute permission to gradlew
-        run: chmod +x ./gradlew
-        working-directory: firstService
+          distribution: 'zulu'
 
-
-      
-      - name: Build and analyze
+      # Build and Analyze with SonarQube
+      - name: Build and Analyze
         env:
           SONAR_TOKEN: "sqp_240a80acfca1df514eb9a23ae66b313e64ada564"
           SONAR_HOST_URL: "https://c3d4-115-96-175-196.ngrok-free.app"
