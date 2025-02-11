@@ -32,6 +32,6 @@ jobs:
       - name: Build and Analyze
         env:
           SONAR_TOKEN: "sqp_240a80acfca1df514eb9a23ae66b313e64ada564"
-          SONAR_HOST_URL: "https://c3d4-115-96-175-196.ngrok-free.app"
+          SONAR_HOST_URL: "https://46f6-116-75-130-219.ngrok-free.app"
         run: ./gradlew build sonar --info
         working-directory: firstService
